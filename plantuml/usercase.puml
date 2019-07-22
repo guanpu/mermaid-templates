@@ -1,0 +1,13 @@
+@startuml
+Actor 采购
+Actor 需求方
+Actor 1
+
+采购 -down-> (录入预算): 财年开始前
+采购 -down-> (录入预算): 财年开始前
+采购 -down-> (拆分PR): PR审批通过后
+采购 -down-> (转移PO金额): 业务方发起
+
+需求方 --> (提交需求)
+
+@enduml

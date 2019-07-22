@@ -1,0 +1,19 @@
+@startuml
+(*) --> "打开字由工具"
+if "本地是否有token" then
+-right->[没有] "打开WebView\n并跳转到/plugin/login"
+if "buc已登录" then
+--> [已登录] "/plugin/login"
+else
+-right-> [未登录] "WebView\n跳到buc登录"
+-down-> [域账号登录] "WebView\nlogin.alibaba-inc.com"
+-left-> [登录成功] "/plugin/login"
+endif
+--> [获取token和用户] "登录微服务"
+--> "WebView\n获取返回的token和用户"
+--> "记录token"
+-down-> (*)
+else
+-right-> [有] (*)
+endif
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+|tool|
+start
+if (本地是否有token) then (没有)
+|#AntiqueWhite|ICS登录页|
+:打开WebView\n跳转到/plugin/login;
+if (判断buc是否已登录) then (未登录)
+|BUC登录页|
+:WebView跳转到\nlogin.alibaba-inc.com;
+-> 登录成功;
+else (已登录)
+endif
+|#AntiqueWhite|ICS登录页|
+:/plugin/login;
+|登录微服务|
+:获取用户;
+|#AntiqueWhite|ICS登录页|
+:/plugin/login;
+|字由工具|
+-> 返回token和用户;
+stop
+else (有)
+|字由工具|
+stop
+endif
+@enduml

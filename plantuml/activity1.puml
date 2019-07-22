@@ -1,0 +1,16 @@
+@startuml
+start
+:打开字由工具;
+if (本地是否有token) then (有)
+stop
+else (没有)
+:打开WebView\n跳转到/plugin/login;
+if (判断buc是否已登录) then (未登录)
+:WebView跳转到\nlogin.alibaba-inc.com;
+-> 登录成功;
+else (已登录)
+endif
+:/plugin/login;
+:登录微服务;
+stop
+@enduml

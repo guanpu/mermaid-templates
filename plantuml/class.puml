@@ -1,0 +1,54 @@
+@startuml
+
+class Pr<<预算>> {
+  - String code
+  - int fiscalYear
+  - BigDecimal amount
+  - BigDecimal remainAmount
+  - User owner
+
+  + boolean changeOwner(User newOwner)
+  + Po splitPr(String projectName, BigDecimal amount)
+  - boolean checkRemainAmount(float level)
+}
+
+class Company<<供应商>> {
+  String code
+  String name
+}
+
+class Po<<PO单>> {
+  String code;
+  Date createDate
+  BigDecimal amount
+  BigDecimal remainAmount
+
+  boolean transformAmount(Po toPo, BigDecimal amount)
+}
+
+class User<<用户>> {
+  Role[] role
+  String name
+  String code
+  String cellphone
+}
+
+class Demand<<需求>> {
+  String name
+  String code
+  User demander
+}
+
+enum Role<<角色>> {
+  Purchaser
+  Demander
+}
+
+User "1" --* "n" Role
+Po "n" -- "1" Company
+Pr "1" *-- "n" Po
+Pr "1" --o "1" User
+Po "1" --* "n" Demand
+Demand "1" --o "1" User
+
+@enduml

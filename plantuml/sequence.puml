@@ -1,0 +1,31 @@
+@startuml
+Actor 需求方
+participant "Demand"
+participant "Po"
+
+需求方 -> Demand: 提交需求
+activate Demand
+Demand -> Po: 占Po金额
+activate Po
+Po --> Demand: return success
+deactivate Po
+Demand --> 需求方: return success
+deactivate Demand
+
+newpage
+
+需求方 -> Demand: 提交需求
+activate Demand
+Demand -> Po: 占Po金额
+activate Po
+alt 金额够用
+Po -[#green]-> Demand: return success
+Demand -[#green]-> 需求方: return success
+else 金额不够
+Po -[#red]-> Demand: return fail
+deactivate Po
+Demand -[#red]-> 需求方: return fail
+deactivate Demand
+end
+
+@enduml
